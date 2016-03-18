@@ -25,8 +25,12 @@ Vex.Flow.FakeElement = (function() {
       
     },
     
+    create: function() {
+      console.log("FakeElement.create");
+    },
+    
     render: function() {
-      // TODO turn internal representation in SVG string
+      // TODO turn internal representation into SVG string
       return 'fake-representation';
     },
   };

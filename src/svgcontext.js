@@ -37,6 +37,7 @@ Vex.Flow.SVGContext = (function() {
       this.element = element;
       // Create the SVG in the SVG namespace:
       this.svgNS = "http://www.w3.org/2000/svg";
+      this.create = this.element.create || this.docCreate;
       var svg = this.create("svg");
       // Add it to the canvas:
       this.element.appendChild(svg);
@@ -87,7 +88,7 @@ Vex.Flow.SVGContext = (function() {
       this.iePolyfill();
     },
 
-    create: function(svgElementType) {
+    docCreate: function(svgElementType) {
       return document.createElementNS(this.svgNS, svgElementType);
     },
 
