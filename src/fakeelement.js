@@ -55,6 +55,7 @@ Vex.Flow.FakeElement = (function() {
     },
     
     render: function(moreAttribs) {
+      var ret;
       // fancy case of rendering out the container to a nice standalone string,
       // equivalent to an SVG file that can be loaded into a browser as an .svg image file,
       // or converted into a data URL (see toDataUri() method)
@@ -62,7 +63,7 @@ Vex.Flow.FakeElement = (function() {
         this.children[0].tag === 'svg') {
         var w = this.width;
         var h = this.height;
-        var ret = '<?xml version="1.0" encoding="utf-8"?>\n';
+        ret = '<?xml version="1.0" encoding="utf-8"?>\n';
         ret += '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n';
         var attribs = ' version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"\n';
         attribs += '     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"\n';
@@ -77,7 +78,7 @@ Vex.Flow.FakeElement = (function() {
       if (Object.keys(this.attributes).length > 0) {
         moreAttribs = ' ';
       }
-      var ret = '<' + this.tag + moreAttribs;
+      ret = '<' + this.tag + moreAttribs;
       // TODO style tag string according to whether children and/or attributes or not!
       for (var prop in this.attributes) {
         ret += prop + '="' + addSlashes(this.attributes[prop]) + '"' + ' '; // escape the string
