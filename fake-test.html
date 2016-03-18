@@ -55,15 +55,16 @@
   <h1>VexFlow </h1>
 
   <h2>Browserless SVG example, created as a string and set as base64 data URI</h2>
-  <img id="img-example" src="unavailable" />
+  <div id="img-container"></div>
   <script type="text/javascript">
     var fakeElement = new Vex.Flow.FakeElement(500, 200);
     var renderer = new Vex.Flow.Renderer(fakeElement, Vex.Flow.Renderer.Backends.SVG);
     var ctx = renderer.getContext();
     drawToContext(ctx);
-    // TODO clean this up (create image and add to div, instead of using broken  src
-    var imgElement = document.getElementById("img-example");
+    var container = document.getElementById("img-container");
+    var imgElement = document.createElement("img");
     imgElement.src = fakeElement.toDataUri();
+    container.appendChild(imgElement);
   </script>
 
   <h2>SVG: normal in-browser &mdash; real DOM, real XML</h2>
