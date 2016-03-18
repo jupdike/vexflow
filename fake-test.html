@@ -54,17 +54,26 @@
 <body>
   <h1>VexFlow </h1>
 
-  <h2>Invisible -- that is the point</h2>
+  <h2>Browserless SVG example, created as a string and set as base64 data URI</h2>
+  <img id="img-example" src="unavailable" />
   <script type="text/javascript">
     var fakeElement = new Vex.Flow.FakeElement(200, 200);
     var renderer = new Vex.Flow.Renderer(fakeElement, Vex.Flow.Renderer.Backends.SVG);
     var ctx = renderer.getContext();
     drawToContext(ctx);
+    var imgElement = document.getElementById("img-example");
     console.log("fakeElement.render() -->");
-    console.log(fakeElement.render());
+    var svgAsString = fakeElement.render();
+    console.log(svgAsString);
+    var encoded = btoa(svgAsString);
+    console.log(encoded);
+    var url = 'data:image/svg+xml,' + encoded;
+    console.log(url);
+    imgElement.src = url;
+    
   </script>
 
-  <h2>SVG -- TODO normal guy here!</h2>
+  <h2>SVG: normal in-browser &emdash; real DOM, real XML</h2>
   <div id="svg-element"></div>
   <script type="text/javascript">
     var element = document.getElementById("svg-element");
