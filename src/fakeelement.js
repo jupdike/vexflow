@@ -54,7 +54,7 @@ Vex.Flow.FakeElement = (function() {
       return uri;
     },
     
-    render: function(moreAttribs) {
+    render: function(moreAttribs) { // usually not called with any arguments; internal
       var ret;
       // fancy case of rendering out the container to a nice standalone string,
       // equivalent to an SVG file that can be loaded into a browser as an .svg image file,
@@ -79,7 +79,8 @@ Vex.Flow.FakeElement = (function() {
         moreAttribs = ' ';
       }
       ret = '<' + this.tag + moreAttribs;
-      // TODO style tag string according to whether children and/or attributes or not!
+      // TODO style 'tag' string according to whether children and/or attributes or not!
+      //      e.g.  <br /> (desired)  vs.  <br></br> (current)
       for (var prop in this.attributes) {
         ret += prop + '="' + addSlashes(this.attributes[prop]) + '"' + ' '; // escape the string
       }
@@ -91,7 +92,6 @@ Vex.Flow.FakeElement = (function() {
       return ret;
     },
   };
-
 
   return FakeElement;
 }());

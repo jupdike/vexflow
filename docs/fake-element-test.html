@@ -61,6 +61,8 @@
     var container = document.getElementById("img-container");
     var imgElement = document.createElement("img");
     imgElement.src = fakeElement.toDataUri();
+    // could call also fakeElement.render() to get string
+    // without converting to image data URI
     container.appendChild(imgElement);
   </script>
 
