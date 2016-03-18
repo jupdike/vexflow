@@ -8,30 +8,57 @@
 
 /** @constructor */
 Vex.Flow.FakeElement = (function() {
-  function FakeElement(width, height) {
+  function FakeElement(tag) {
     //
-    this.init(width, height);
+    this.init(tag);
   }
   
+  function addslashes(str) {
+    return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+  }
+
   FakeElement.constantGuy = 42;
   
   FakeElement.prototype = {
-    init: function(width, height) {
-      this.width = width;
-      this.height = height;
+    init: function(tag) {
+    // TODO deal with this
+      this.width = 200; //width;
+      this.height = 200; //height;
+      this.tag = tag;
+      this.children = [];
+      this.attributes = {};
     },
     
-    appendChild: function() {
-      
+    appendChild: function(child) {
+      this.children.push(child);
     },
     
-    create: function() {
+    create: function(tag) {
       console.log("FakeElement.create");
+      return new FakeElement(tag);
+    },
+    
+    setAttributeNS: function(nsDummy, k, v) {
+      console.log("FakeElement.setAttributeNS");
+      this.attributes[k] = v;
+    },
+
+    setAttribute: function(k, v) {
+      console.log("FakeElement.setAttribute");
+      this.attributes[k] = v;
     },
     
     render: function() {
-      // TODO turn internal representation into SVG string
-      return 'fake-representation';
+      var ret = '<'+this.tag+' ';
+      for (var prop in this.attributes) {
+        ret += prop + '="' + addslashes(this.attributes[prop]) + '"' + ' '; // escape the string
+      }
+      ret += '>';
+      for (var i = 0; i < this.children.length; i++) {
+        ret += this.children[i].render() + '\n';
+      }
+      ret += '</'+this.tag+'>';
+      return ret;
     },
   };
 
