@@ -42,6 +42,7 @@ module.exports = function(grunt) {
                   "src/modifiercontext.js",
                   "src/accidental.js",
                   "src/dot.js",
+                  "src/fakeelement.js",
                   "src/formatter.js",
                   "src/stavetie.js",
                   "src/tabtie.js",
