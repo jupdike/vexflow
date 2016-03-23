@@ -27,6 +27,7 @@ Vex.Flow.FakeElement = (function() {
       this.tag = FakeElement.outsideWrapper;
       this.children = [];
       this.attributes = {};
+      this.isFake = true;
     },
     
     appendChild: function(child) {

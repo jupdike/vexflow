@@ -119,7 +119,7 @@ Vex.Flow.Renderer = (function() {
           "Invalid selector for renderer.");
 
       // Get element from selector
-      this.element = document.getElementById(sel);
+      if (!sel.isFake && document) this.element = document.getElementById(sel);
       if (!this.element) this.element = sel;
 
       // Verify backend and create context
