@@ -57,6 +57,7 @@ Vex.Flow.FakeElement = (function() {
     
     render: function(moreAttribs) { // usually not called with any arguments; internal
       var ret;
+      var normalAttributes = !moreAttribs;
       // fancy case of rendering out the container to a nice standalone string,
       // equivalent to an SVG file that can be loaded into a browser as an .svg image file,
       // or converted into a data URL (see toDataUri() method)
@@ -76,14 +77,16 @@ Vex.Flow.FakeElement = (function() {
       
       // normal case of rendering simple nested XML bits to string
       moreAttribs = moreAttribs || '';
-      if (Object.keys(this.attributes).length > 0) {
+      if (normalAttributes) {
         moreAttribs = ' ';
-      }
+      } // else clobber attributes!
       ret = '<' + this.tag + moreAttribs;
       // TODO style 'tag' string according to whether children and/or attributes or not!
       //      e.g.  <br /> (desired)  vs.  <br></br> (current)
-      for (var prop in this.attributes) {
-        ret += prop + '="' + addSlashes(this.attributes[prop]) + '"' + ' '; // escape the string
+      if (normalAttributes) {
+        for (var prop in this.attributes) {
+          ret += prop + '="' + addSlashes(this.attributes[prop]) + '"' + ' '; // escape the string
+        }
       }
       ret += '>';
       for (var i = 0; i < this.children.length; i++) {
