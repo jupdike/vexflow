@@ -19,7 +19,7 @@ if (typeof Vex === 'undefined') {
 Vex.L = function(block, args) {
   if (!args) return;
   var line = Array.prototype.slice.call(args).join(" ");
-  window.console.log(block + ": " + line);
+  console.log(block + ": " + line);
 };
 
 // Default runtime exception.
@@ -170,7 +170,7 @@ Vex.StackTrace = function() {
 // Dump warning to console.
 Vex.W = function() {
   var line = Array.prototype.slice.call(arguments).join(" ");
-  window.console.log("Warning: ", line, Vex.StackTrace());
+  console.log("Warning: ", line, Vex.StackTrace());
 };
 
 // Used by various classes (e.g., SVGContext) to provide a
